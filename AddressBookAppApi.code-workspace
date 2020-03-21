@@ -1,0 +1,21 @@
+{
+    "folders": [
+        {
+            "name": "API",
+            "path": "AddressBookApp.Api"
+        },
+        {
+            "name": "Tests",
+            "path": "AddressBookApp.Api.Tests"
+        }
+    ],
+    "settings": {
+        "dotnet-test-explorer.testProjectPath": "AddressBookApp.Api.Tests.csproj"
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-dotnettools.csharp",
+            "formulahendry.dotnet-test-explorer"
+        ]
+    }
+}
