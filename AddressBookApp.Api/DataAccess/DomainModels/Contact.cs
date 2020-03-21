@@ -1,9 +1,8 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using AddressBookApp.DataAccess;
 
-namespace AddressBookApp.Api.Models.DomainModels
+namespace AddressBookApp.Api.DataAccess.DomainModels
 {
     /// <summary>
     /// Represents a Contact that can appear within an address book.

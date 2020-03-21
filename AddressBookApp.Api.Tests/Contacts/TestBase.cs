@@ -1,7 +1,8 @@
+using AddressBookApp.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AddressBookApp.DataAccess.Tests
+namespace AddressBookApp.Tests
 {
     public class DataAccessTestBase
     {

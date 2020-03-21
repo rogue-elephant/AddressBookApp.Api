@@ -1,17 +1,15 @@
 using System;
-using AddressBookApp.Api.Models.DomainModels;
+using AddressBookApp.Api.DataAccess.DomainModels;
+using AddressBookApp.DataAccess.Validation;
 using Xunit;
 
-namespace AddressBookApp.DataAccess.Tests
+namespace AddressBookApp.Tests
 {
     /// <summary>
     /// Tests focused on logic around creating a Contact entity within the data context.
     /// </summary>
     public class ContactCreatingTests : DataAccessTestBase
-    {
-        #region THEORY
-        #endregion
-        #region FACT
+    {        
         [Fact]
         public void Fact_CreatingContactShouldGenerateTimestamps()
         {
@@ -49,6 +47,5 @@ namespace AddressBookApp.DataAccess.Tests
             Assert.True(newChanges == null || newChanges.Value == 0);
             Assert.Contains("the same key value for {'Email'} is already being tracked", actualError.Message);
         }
-        #endregion
     }
 }
