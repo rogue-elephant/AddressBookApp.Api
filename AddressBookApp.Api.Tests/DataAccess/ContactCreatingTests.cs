@@ -19,7 +19,7 @@ namespace AddressBookApp.DataAccess.Tests
             var contact = new Contact("John", "Smith", DateTime.Parse("01/01/1985"), "john.smith@whateverhappenedtogeocities.com");
 
             // Act
-            dbContext.Contact.Add(contact);
+            dbContext.Contacts.Add(contact);
             dbContext.SaveChanges();
 
             // Assert
@@ -32,7 +32,7 @@ namespace AddressBookApp.DataAccess.Tests
         {
             // Arrange
             var oldContact = new Contact("John", "Smith", DateTime.Parse("01/01/1985"), "john.smith@whateverhappenedtogeocities.com");
-            dbContext.Contact.Add(oldContact);
+            dbContext.Contacts.Add(oldContact);
             int oldChanges = dbContext.SaveChanges();
 
             // Act
@@ -40,7 +40,7 @@ namespace AddressBookApp.DataAccess.Tests
             int? newChanges = null;
             var actualError = Assert.Throws<InvalidOperationException>(() =>
             {
-                dbContext.Contact.Add(newContact);
+                dbContext.Contacts.Add(newContact);
                 newChanges = dbContext.SaveChanges();
             });
 

@@ -17,13 +17,13 @@ namespace AddressBookApp.DataAccess.Tests
         {
             // Arrange
             var contact = new Contact("John", "Smith", DateTime.Parse("01/01/1985"), "john.smith@whateverhappenedtogeocities.com");
-            dbContext.Contact.Add(contact);
+            dbContext.Contacts.Add(contact);
             dbContext.SaveChanges();
             var initialUpdateTimeStamp = contact.UpdatedUtc;
 
             // Act
             contact.Surname = "Doe";
-            dbContext.Contact.Update(contact);
+            dbContext.Contacts.Update(contact);
             dbContext.SaveChanges();
 
             // Assert

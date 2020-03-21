@@ -7,7 +7,7 @@ namespace AddressBookApp.DataAccess
 {
     public class AddressBookDataContext : DbContext
     {
-        public DbSet<Contact> Contact { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
         public AddressBookDataContext(DbContextOptions<AddressBookDataContext> options) : base(options) { }
 
         public override int SaveChanges()
