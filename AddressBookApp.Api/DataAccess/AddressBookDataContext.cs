@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using AddressBookApp.Api.Models.DomainModels;
+using AddressBookApp.Api.DataAccess.DomainModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace AddressBookApp.DataAccess

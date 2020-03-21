@@ -1,17 +1,14 @@
 using System;
-using AddressBookApp.Api.Models.DomainModels;
+using AddressBookApp.Api.DataAccess.DomainModels;
 using Xunit;
 
-namespace AddressBookApp.DataAccess.Tests
+namespace AddressBookApp.Tests
 {
     /// <summary>
     /// Tests focused on logic around updating a Contact entity within the data context.
     /// </summary>
     public class ContactUpdatingTests : DataAccessTestBase
     {
-        #region THEORY
-        #endregion
-        #region FACT
         [Fact]
         public void Fact_UpdatingContactShouldUpdateUpdatedTimestamp ()
         {
@@ -29,6 +26,5 @@ namespace AddressBookApp.DataAccess.Tests
             // Assert
             Assert.True(contact.UpdatedUtc > initialUpdateTimeStamp);
         }
-        #endregion
     }
 }
