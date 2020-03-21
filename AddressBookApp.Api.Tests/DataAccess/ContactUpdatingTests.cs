@@ -4,26 +4,14 @@ using Xunit;
 
 namespace AddressBookApp.DataAccess.Tests
 {
-    public class ContactTests : DataAccessTestBase
+    /// <summary>
+    /// Tests focused on logic around updating a Contact entity within the data context.
+    /// </summary>
+    public class ContactUpdatingTests : DataAccessTestBase
     {
         #region THEORY
         #endregion
         #region FACT
-        [Fact]
-        public void Fact_CreatingContactShouldGenerateTimestamps ()
-        {
-            // Arrange
-            var contact = new Contact("John", "Smith", DateTime.Parse("01/01/1985"), "john.smith@whateverhappenedtogeocities.com");
-
-            // Act
-            dbContext.Contact.Add(contact);
-            dbContext.SaveChanges();
-
-            // Assert
-            Assert.NotNull(contact.InsertedUtc);
-            Assert.NotNull(contact.UpdatedUtc);
-        }
-
         [Fact]
         public void Fact_UpdatingContactShouldUpdateUpdatedTimestamp ()
         {
