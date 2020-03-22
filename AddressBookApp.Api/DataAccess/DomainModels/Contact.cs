@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using AddressBookApp.DataAccess;
 
-namespace AddressBookApp.Api.DataAccess.DomainModels
+namespace AddressBookApp.DataAccess.DomainModels
 {
     /// <summary>
     /// Represents a Contact that can appear within an address book.

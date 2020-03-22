@@ -16,7 +16,7 @@ namespace AddressBookApp.Tests
                 .BuildServiceProvider();
 
             var builder = new DbContextOptionsBuilder<AddressBookDataContext>();
-            var options = builder.UseInMemoryDatabase("dev_db").UseInternalServiceProvider(serviceProvider).Options;
+            var options = builder.UseInMemoryDatabase("TestLibDb").UseInternalServiceProvider(serviceProvider).Options;
 
             AddressBookDataContext dbContext = new AddressBookDataContext(options);
             dbContext.Database.EnsureDeleted();

@@ -1,5 +1,5 @@
 using System;
-using AddressBookApp.Api.DataAccess.DomainModels;
+using AddressBookApp.DataAccess.DomainModels;
 using AddressBookApp.DataAccess.Validation;
 using Xunit;
 
@@ -23,6 +23,8 @@ namespace AddressBookApp.Tests
             // Assert
             Assert.NotNull(contact.InsertedUtc);
             Assert.NotNull(contact.UpdatedUtc);
+            Assert.True(contact.InsertedUtc >= DateTime.UtcNow.AddMinutes(-5));
+            Assert.True(contact.UpdatedUtc >= DateTime.UtcNow.AddMinutes(-5));
         }
 
         [Fact]

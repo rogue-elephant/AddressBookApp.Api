@@ -1,5 +1,5 @@
 using System;
-using AddressBookApp.Api.DataAccess.DomainModels;
+using AddressBookApp.DataAccess.DomainModels;
 using FluentValidation;
 
 namespace AddressBookApp.DataAccess.Validation
