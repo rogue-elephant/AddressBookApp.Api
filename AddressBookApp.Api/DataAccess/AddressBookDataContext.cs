@@ -1,6 +1,8 @@
 using System;
 using System.Linq;
-using AddressBookApp.Api.DataAccess.DomainModels;
+using System.Threading;
+using System.Threading.Tasks;
+using AddressBookApp.DataAccess.DomainModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace AddressBookApp.DataAccess
@@ -10,7 +12,7 @@ namespace AddressBookApp.DataAccess
         public DbSet<Contact> Contacts { get; set; }
         public AddressBookDataContext(DbContextOptions<AddressBookDataContext> options) : base(options) { }
 
-        public override int SaveChanges()
+        private void SetDefaultEntityValues()
         {
             foreach (var insertedOrUpdatedEntry in ChangeTracker
                 .Entries()
@@ -28,8 +30,19 @@ namespace AddressBookApp.DataAccess
                 if (insertedOrUpdatedEntry.State == EntityState.Added)
                     ((EntityBase)insertedOrUpdatedEntry.Entity).InsertedUtc = DateTime.UtcNow;
             }
+        }
+
+        public override int SaveChanges()
+        {
+            this.SetDefaultEntityValues();
 
             return base.SaveChanges();
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            this.SetDefaultEntityValues();
+            return base.SaveChangesAsync();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

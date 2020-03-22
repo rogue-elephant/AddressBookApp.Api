@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AddressBookApp.Api.DataAccess.DomainModels;
+using AddressBookApp.DataAccess.DomainModels;
 using AddressBookApp.DataAccess;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,39 +14,27 @@ namespace AddressBookApp.Api.Controllers
     [Route("api/[controller]")]
     public class ContactsController : ControllerBase
     {
-        private static readonly Contact[] Contacts = new[]
-        {
-            new Contact
-            {
-                FirstName = "John",
-                Surname = "Smith",
-                DateOfBirth = DateTime.Parse("1/1/1975"),
-                Email = "foo@bar.com"
-            }
-        };
-
         private readonly ILogger<ContactsController> _logger;
         private readonly AddressBookDataContext _dbContext;
+        private readonly ContactRepository _repository;
 
         public ContactsController(ILogger<ContactsController> logger, AddressBookDataContext dbContext)
         {
             _logger = logger;
             _dbContext = dbContext;
+            _repository = new ContactRepository(_dbContext);
         }
 
         [HttpGet]
-        public IEnumerable<Contact> Get()
-        {
-            return Contacts;
-        }
+        public async Task<IEnumerable<Contact>> Get() => await _repository.GetContacts();
 
         [HttpGet()]
         [Route("{email}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetByEmail(string email)
+        public async Task<IActionResult> GetByEmail(string email)
         {
-            var foundContact = _dbContext.Contacts.Find(email);
+            var foundContact = await _repository.GetContactByEmail(email);
+            if(foundContact == null)
+                return NotFound();
 
             return Ok(foundContact);
         }
@@ -54,8 +42,7 @@ namespace AddressBookApp.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Contact>> PostContact(Contact contact)
         {
-            _dbContext.Contacts.Add(contact);
-            await _dbContext.SaveChangesAsync();
+            await _repository.AddContact(contact);
 
             return CreatedAtAction(nameof(GetByEmail), new { email = contact.Email }, contact);
         }

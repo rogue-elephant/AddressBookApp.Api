@@ -1,5 +1,5 @@
 using System;
-using AddressBookApp.Api.DataAccess.DomainModels;
+using AddressBookApp.DataAccess.DomainModels;
 using AddressBookApp.DataAccess.Validation;
 using FluentValidation.TestHelper;
 using Xunit;
