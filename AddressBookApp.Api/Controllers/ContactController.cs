@@ -40,11 +40,20 @@ namespace AddressBookApp.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Contact>> PostContact(Contact contact)
+        public async Task<ActionResult<Contact>> AddContact(Contact contact)
         {
             await _repository.AddContact(contact);
 
             return CreatedAtAction(nameof(GetByEmail), new { email = contact.Email }, contact);
+        }
+
+        [HttpPut]
+        [Route("{email}")]
+        public async Task<ActionResult<Contact>> UpdateContact(string email, Contact contact)
+        {
+            var updatedContact = await _repository.UpdateContact(email, contact);
+
+            return Ok(updatedContact);
         }
     }
 }
