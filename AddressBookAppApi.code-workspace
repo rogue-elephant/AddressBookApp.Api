@@ -17,5 +17,78 @@
             "ms-dotnettools.csharp",
             "formulahendry.dotnet-test-explorer"
         ]
+    },
+    "tasks": {
+        "tasks": [
+            {
+                "type": "docker-build",
+                "label": "docker-build: debug",
+                "dependsOn": [
+                    "build"
+                ],
+                "dockerBuild": {
+                    "tag": "api:dev",
+                    "target": "base",
+                    "dockerfile": "${workspaceFolder}/Dockerfile",
+                    "context": "${workspaceFolder}",
+                    "pull": true
+                },
+                "netCore": {
+                    "appProject": "${workspaceFolder}/AddressBookApp.Api.csproj"
+                }
+            },
+            {
+                "type": "docker-build",
+                "label": "docker-build: release",
+                "dependsOn": [
+                    "build"
+                ],
+                "dockerBuild": {
+                    "tag": "api:latest",
+                    "dockerfile": "${workspaceFolder}/Dockerfile",
+                    "context": "${workspaceFolder}",
+                    "pull": true
+                },
+                "netCore": {
+                    "appProject": "${workspaceFolder}/AddressBookApp.Api.csproj"
+                }
+            },
+            {
+                "type": "docker-run",
+                "label": "docker-run: debug",
+                "dependsOn": [
+                    "docker-build: debug"
+                ],
+                "dockerRun": {},
+                "netCore": {
+                    "appProject": "${workspaceFolder}/AddressBookApp.Api.csproj",
+                    "enableDebugging": true
+                }
+            },
+            {
+                "type": "docker-run",
+                "label": "docker-run: release",
+                "dependsOn": [
+                    "docker-build: release"
+                ],
+                "dockerRun": {},
+                "netCore": {
+                    "appProject": "${workspaceFolder}/AddressBookApp.Api.csproj"
+                }
+            }
+        ]
+    },
+    "launch": {
+        "configurations": [
+            {
+                "name": "Docker .NET Core Launch",
+                "type": "docker",
+                "request": "launch",
+                "preLaunchTask": "docker-run: debug",
+                "netCore": {
+                    "appProject": "${workspaceFolder}/AddressBookApp.Api.csproj"
+                }
+            }
+        ]
     }
 }
