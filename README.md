@@ -15,3 +15,5 @@ docker run --rm -it  -p 5000:5000/tcp address-book-app-api:latest
 ```
 
 And you should be able to open the `AddressBookApi.postman_collection` file inside postman to try out the different commands.
+
+![docker and postman](docker-and-postman.gif)
