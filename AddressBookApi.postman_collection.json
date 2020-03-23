@@ -24,12 +24,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "https://localhost:5001/api/contacts",
-					"protocol": "https",
+					"raw": "http://localhost:5000/api/contacts",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5001",
+					"port": "5000",
 					"path": [
 						"api",
 						"contacts"
@@ -60,12 +60,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5001/api/contacts",
-					"protocol": "https",
+					"raw": "http://localhost:5000/api/contacts",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5001",
+					"port": "5000",
 					"path": [
 						"api",
 						"contacts"
@@ -88,7 +88,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n        \"firstName\": \"John\",\n        \"surname\": \"Smith\",\n        \"dateOfBirth\": \"1975-01-01\"\n    }",
+					"raw": "{\n        \"firstName\": \"John\",\n        \"surname\": \"Poop\",\n        \"dateOfBirth\": \"1975-01-01\"\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -96,12 +96,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5001/api/contacts/foo@bar.com",
-					"protocol": "https",
+					"raw": "http://localhost:5000/api/contacts/foo@bar.com",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5001",
+					"port": "5000",
 					"path": [
 						"api",
 						"contacts",
@@ -123,12 +123,12 @@
 					}
 				],
 				"url": {
-					"raw": "https://localhost:5001/api/contacts/foo@bar.com",
-					"protocol": "https",
+					"raw": "http://localhost:5000/api/contacts/foo@bar.com",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5001",
+					"port": "5000",
 					"path": [
 						"api",
 						"contacts",
