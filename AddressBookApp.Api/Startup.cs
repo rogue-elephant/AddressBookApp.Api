@@ -40,7 +40,7 @@ namespace AddressBookApp.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection(); // turning this off for simplicity of project for now
 
             app.UseRouting();
 
