@@ -1,5 +1,6 @@
 using System;
 using AddressBookApp.DataAccess.DomainModels;
+using AddressBookApp.Utilities;
 using FluentValidation;
 
 namespace AddressBookApp.DataAccess.Validation
@@ -21,11 +22,15 @@ namespace AddressBookApp.DataAccess.Validation
 
             RuleFor(x => x.Email)
                 .NotNull()
-                .EmailAddress();
+                .AddError(ErrorCode.StringMustNotBeNullOrEmpty)
+                .EmailAddress()
+                .AddError(ErrorCode.EmailValidationFail);
 
             RuleFor(x => x.DateOfBirth)
                 .NotNull()
-                .LessThan(DateTime.UtcNow);
+                .AddError(ErrorCode.StringMustNotBeNullOrEmpty)
+                .LessThan(DateTime.UtcNow)
+                .AddError(ErrorCode.DateMustBeInPast);
         }
     }
 }
