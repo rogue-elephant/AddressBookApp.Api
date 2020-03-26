@@ -14,23 +14,23 @@ namespace AddressBookApp.DataAccess.Validation
         {
             RuleFor(x => x.FirstName)
                 .Cascade(CascadeMode.StopOnFirstFailure)
-                .NameValidation();
+                .NameValidation("First Name");
 
             RuleFor(x => x.Surname)
                 .Cascade(CascadeMode.StopOnFirstFailure)
-                .NameValidation();
+                .NameValidation("Surname");
 
             RuleFor(x => x.Email)
                 .NotNull()
-                .AddError(ErrorCode.StringMustNotBeNullOrEmpty)
+                .AddError(ErrorCode.StringMustNotBeNullOrEmpty, "Email")
                 .EmailAddress()
-                .AddError(ErrorCode.EmailValidationFail);
+                .AddError(ErrorCode.EmailValidationFail, "Email");
 
             RuleFor(x => x.DateOfBirth)
                 .NotNull()
-                .AddError(ErrorCode.StringMustNotBeNullOrEmpty)
+                .AddError(ErrorCode.StringMustNotBeNullOrEmpty, "Date of Birth")
                 .LessThan(DateTime.UtcNow)
-                .AddError(ErrorCode.DateMustBeInPast);
+                .AddError(ErrorCode.DateMustBeInPast, "Date of Birth");
         }
     }
 }

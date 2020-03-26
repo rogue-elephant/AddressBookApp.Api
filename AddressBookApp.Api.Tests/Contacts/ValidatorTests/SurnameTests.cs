@@ -17,9 +17,16 @@ namespace AddressBookApp.Tests.Contact.Validation
         [InlineData(null)] // No nulls
         [InlineData("")] // No empty
         [InlineData("    ")] // No whitespace
+        public void Theory_ContactValidation_Surname_CannotBeBlank(string surname) =>
+            validator.ShouldHaveValidationErrorFor(contact => contact.Surname, surname)
+            .WithErrorCode(ErrorCode.StringMustNotBeNullOrEmpty.GetErrorCodeString())
+            .WithErrorMessage("Invalid Surname: String cannot be null or empty");
+
         [InlineData("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz")] // Cannot be over 100 characters
-        public void Theory_ContactValidation_Surname_Failure(string surname) =>
-            validator.ShouldHaveValidationErrorFor(contact => contact.Surname, surname);
+        public void Theory_ContactValidation_Surname_CannotBeTooLong(string surname) =>
+            validator.ShouldHaveValidationErrorFor(contact => contact.Surname, surname)
+            .WithErrorCode(ErrorCode.StringLengthTooLong.GetErrorCodeString())
+            .WithErrorMessage("Invalid Surname: String length too long");
         #endregion Failure Tests
 
         #region Success Tests

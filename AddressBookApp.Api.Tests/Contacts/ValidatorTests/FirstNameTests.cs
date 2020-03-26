@@ -20,13 +20,13 @@ namespace AddressBookApp.Tests.Contact.Validation
         public void Theory_ContactValidation_FirstName_CannotBeBlank(string firstName) =>
             validator.ShouldHaveValidationErrorFor(contact => contact.FirstName, firstName)
             .WithErrorCode(ErrorCode.StringMustNotBeNullOrEmpty.GetErrorCodeString())
-            .WithErrorMessage("String cannot be null or empty");
+            .WithErrorMessage("Invalid First Name: String cannot be null or empty");
 
         [InlineData("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz")]
         public void Theory_ContactValidation_FirstName_CannotBeTooLong(string firstName) =>
             validator.ShouldHaveValidationErrorFor(contact => contact.FirstName, firstName)
             .WithErrorCode(ErrorCode.StringLengthTooLong.GetErrorCodeString())
-            .WithErrorMessage("String length too long");
+            .WithErrorMessage("Invalid First Name: String length too long");
         #endregion Failure tests
 
         #region Success Tests
