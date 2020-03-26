@@ -13,7 +13,9 @@ namespace AddressBookApp.Utilities
         [Description("Must be a valid email address")]
         EmailValidationFail = 2003,
         [Description("Date must be in the past")]
-        DateMustBeInPast = 2004
+        DateMustBeInPast = 2004,
+        [Description("Must be a valid Date")]
+        InvalidDate = 2005
         #endregion
         // 3000s = Controller
     }

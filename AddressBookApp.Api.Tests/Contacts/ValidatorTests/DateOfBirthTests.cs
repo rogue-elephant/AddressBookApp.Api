@@ -14,11 +14,22 @@ namespace AddressBookApp.Tests.Contact.Validation
     {        
         #region Failure Tests
         [Fact]
-        public void Fact_ContactValidation_DoBMustNotBeInPast() =>
-            validator.ShouldHaveValidationErrorFor(contact => contact.DateOfBirth, DateTime.Now.AddDays(1));
+        public void Fact_ContactValidation_DoB_CannotBeDefault() =>
+            validator.ShouldHaveValidationErrorFor(contact => contact.DateOfBirth, default(DateTime))
+            .WithErrorCode(ErrorCode.StringMustNotBeNullOrEmpty.GetErrorCodeString())
+            .WithErrorMessage("Invalid Date of Birth: String cannot be null or empty");
+            
+        [Fact]
+        public void Fact_ContactValidation_DoB_CannotBeInPast() =>
+            validator.ShouldHaveValidationErrorFor(contact => contact.DateOfBirth, DateTime.Now.AddDays(1))
+            .WithErrorCode(ErrorCode.DateMustBeInPast.GetErrorCodeString())
+            .WithErrorMessage("Invalid Date of Birth: Date must be in the past");
         #endregion Failure Tests
 
         #region Success Tests
+        [Fact]
+        public void Fact_ContactValidation_Success() =>
+            validator.ShouldNotHaveValidationErrorFor(contact => contact.DateOfBirth, DateTime.Now.AddYears(-20));
         #endregion Success Tests
     }
 }
