@@ -17,6 +17,11 @@ namespace AddressBookApp.Tests.Contact.Validation
         [InlineData(null)] // No nulls
         [InlineData("")] // No empty
         [InlineData("    ")] // No whitespace
+        public void Theory_ContactValidation_Email_CannotBeBlank(string email) =>
+            validator.ShouldHaveValidationErrorFor(contact => contact.Email, email)
+            .WithErrorCode(ErrorCode.StringMustNotBeNullOrEmpty.GetErrorCodeString())
+            .WithErrorMessage("Invalid Email: String cannot be null or empty");
+
         [InlineData("foo")] // need an @
         [InlineData("foo.bar")] // need an @
         [InlineData("foo.bar@")] // need something after @
@@ -25,8 +30,10 @@ namespace AddressBookApp.Tests.Contact.Validation
         [InlineData("@bar.com")]
         [InlineData(".@.")]
         [InlineData("123455")]
-        public void Theory_ContactValidation_Email_Failure(string email) =>
-            validator.ShouldHaveValidationErrorFor(contact => contact.Email, email);
+        public void Theory_ContactValidation_Email_MustBeValidEmail(string email) =>
+            validator.ShouldHaveValidationErrorFor(contact => contact.Email, email)
+            .WithErrorCode(ErrorCode.StringMustNotBeNullOrEmpty.GetErrorCodeString())
+            .WithErrorMessage("Invalid Email: Must be a valid Email");
         #endregion Failure Tests
 
         #region Success Tests

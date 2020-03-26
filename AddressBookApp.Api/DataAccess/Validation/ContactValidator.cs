@@ -21,14 +21,12 @@ namespace AddressBookApp.DataAccess.Validation
                 .NameValidation("Surname");
 
             RuleFor(x => x.Email)
-                .NotNull()
-                .AddError(ErrorCode.StringMustNotBeNullOrEmpty, "Email")
+                .NotNullOrEmpty("Email")
                 .EmailAddress()
                 .AddError(ErrorCode.EmailValidationFail, "Email");
 
             RuleFor(x => x.DateOfBirth)
-                .NotNull()
-                .AddError(ErrorCode.StringMustNotBeNullOrEmpty, "Date of Birth")
+                .NotNullOrEmpty("Date of Birth")
                 .LessThan(DateTime.UtcNow)
                 .AddError(ErrorCode.DateMustBeInPast, "Date of Birth");
         }
