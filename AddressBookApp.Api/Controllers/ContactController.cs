@@ -48,7 +48,7 @@ namespace AddressBookApp.Api.Controllers
             if(response.Errors != null)
                 return BadRequest(response);
 
-            return CreatedAtAction(nameof(GetByEmail), new { email = contact.Email }, contact);
+            return CreatedAtAction(nameof(GetByEmail), new { email = contact.Email }, response.Data);
         }
 
         [HttpPut]
@@ -56,6 +56,8 @@ namespace AddressBookApp.Api.Controllers
         public async Task<ActionResult<ApiResponse<Contact>>> UpdateContact(string email, Contact contact)
         {
             var response = await _repository.UpdateContact(email, contact);
+            if(response == null)
+                return NotFound(email);
             if(response.Errors != null)
                 return BadRequest(response);
 

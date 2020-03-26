@@ -22,7 +22,7 @@ namespace AddressBookApp.DataAccess
 
             await _dbContext.Contacts.AddAsync(contact);
             await _dbContext.SaveChangesAsync();
-            return null;
+            return new ApiResponse<Contact>(contact);
         }
 
         public async Task<ApiResponse<Contact>> UpdateContact(string email, Contact contact)
@@ -35,14 +35,14 @@ namespace AddressBookApp.DataAccess
             foundContact.Surname = contact.Surname;
             foundContact.DateOfBirth = contact.DateOfBirth;
 
-            var validationResult = await _validator.ValidateAsync(contact);
+            var validationResult = await _validator.ValidateAsync(foundContact);
             if(!validationResult.IsValid)
                 return new ApiResponse<Contact>(validationResult.Errors
                 .Select(validationError => new ApiError(validationError.ErrorCode, validationError.ErrorMessage)).ToList());
 
             _dbContext.Contacts.Update(foundContact);
             await _dbContext.SaveChangesAsync();
-            return null;
+            return new ApiResponse<Contact>(foundContact);
         }
 
         public async Task<List<Contact>> GetContacts() => await _dbContext.Contacts.ToListAsync();

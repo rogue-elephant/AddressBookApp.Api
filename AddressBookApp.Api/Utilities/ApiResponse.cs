@@ -5,11 +5,13 @@ namespace AddressBookApp.Utilities
     public class ApiResponse<T>
     {
         public List<ApiError> Errors {get; set;}
+        public T Data {get; set;}
         public ApiResponse(){}
         public ApiResponse(List<ApiError> errors)
             => Errors = errors;
 
-        public T Data {get; set;}
+        public ApiResponse(T data)
+            => Data = data;
     }
 
     public class ApiError
