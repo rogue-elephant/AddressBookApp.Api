@@ -1,5 +1,6 @@
 using System;
 using AddressBookApp.DataAccess.DomainModels;
+using AddressBookApp.Utilities;
 using FluentValidation;
 
 namespace AddressBookApp.DataAccess.Validation
@@ -13,19 +14,21 @@ namespace AddressBookApp.DataAccess.Validation
         {
             RuleFor(x => x.FirstName)
                 .Cascade(CascadeMode.StopOnFirstFailure)
-                .NameValidation();
+                .NameValidation("First Name");
 
             RuleFor(x => x.Surname)
                 .Cascade(CascadeMode.StopOnFirstFailure)
-                .NameValidation();
+                .NameValidation("Surname");
 
             RuleFor(x => x.Email)
-                .NotNull()
-                .EmailAddress();
+                .NotNullOrEmpty("Email")
+                .EmailAddress()
+                .AddError(ErrorCode.EmailValidationFail, "Email");
 
             RuleFor(x => x.DateOfBirth)
-                .NotNull()
-                .LessThan(DateTime.UtcNow);
+                .NotNullOrEmpty("Date of Birth")
+                .LessThan(DateTime.UtcNow)
+                .AddError(ErrorCode.DateMustBeInPast, "Date of Birth");
         }
     }
 }

@@ -7,6 +7,7 @@ using AddressBookApp.DataAccess;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using AddressBookApp.Utilities;
 
 namespace AddressBookApp.Api.Controllers
 {
@@ -40,20 +41,27 @@ namespace AddressBookApp.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Contact>> AddContact(Contact contact)
+        public async Task<ActionResult<ApiResponse<Contact>>> AddContact(Contact contact)
         {
-            await _repository.AddContact(contact);
 
-            return CreatedAtAction(nameof(GetByEmail), new { email = contact.Email }, contact);
+            var response = await _repository.AddContact(contact);
+            if(response.Errors != null)
+                return BadRequest(response);
+
+            return CreatedAtAction(nameof(GetByEmail), new { email = contact.Email }, response.Data);
         }
 
         [HttpPut]
         [Route("{email}")]
-        public async Task<ActionResult<Contact>> UpdateContact(string email, Contact contact)
+        public async Task<ActionResult<ApiResponse<Contact>>> UpdateContact(string email, Contact contact)
         {
-            var updatedContact = await _repository.UpdateContact(email, contact);
+            var response = await _repository.UpdateContact(email, contact);
+            if(response == null)
+                return NotFound(email);
+            if(response.Errors != null)
+                return BadRequest(response);
 
-            return Ok(updatedContact);
+            return Ok(response.Data);
         }
     }
 }
