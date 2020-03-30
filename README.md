@@ -1,5 +1,5 @@
 # AddressBookApp.Api
-![Build and Tests](https://github.com/rogue-elephant/AddressBookApp.Api/workflows/Build%20and%20Tests/badge.svg)
+[![Build and Tests](https://github.com/rogue-elephant/AddressBookApp.Api/workflows/Build%20and%20Tests/badge.svg)](https://github.com/rogue-elephant/AddressBookApp.Api/actions)
 
 Dotnet Core API using EF Core for handling an address book.
 
