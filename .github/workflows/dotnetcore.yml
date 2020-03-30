@@ -17,9 +17,13 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
-    - name: Install dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
+    - name: Install Api dependencies
+      run: dotnet restore AddressBookApp.Api
+    - name: Build Api
+      run: dotnet build AddressBookApp.Api --configuration Release --no-restore
+    - name: Install Test dependencies
+      run: dotnet restore AddressBookApp.Api.Tests
+    - name: Build Test Proj
+      run: dotnet build AddressBookApp.Api.Tests --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test AddressBookApp.Api.Tests --no-restore --verbosity normal
